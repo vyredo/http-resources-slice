@@ -1,0 +1,72 @@
+MIT License
+
+Copyright (c) 2024 create-http-resources-slice
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+**ATTRIBUTION REQUIREMENT:**
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software. When modifying, distributing,
+or creating derivative works, you MUST:
+1. Retain the original copyright notice
+2. Provide clear attribution to the original authors
+3. Include a copy of this license
+4. State any significant changes made to the original work
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Attribution Guidelines
+
+### How to Attribute
+
+When using this library in your project, attribution can be provided in one of the following ways:
+
+**Option 1: In your package.json**
+```json
+{
+  "dependencies": {
+    "create-http-resources-slice": "^0.1.0"
+  },
+  "credits": "This project uses create-http-resources-slice (MIT License)"
+}
+```
+
+**Option 2: In your README**
+```markdown
+## Credits
+This project uses [create-http-resources-slice](https://github.com/yourusername/create-http-resources-slice) (MIT License).
+```
+
+**Option 3: In a NOTICE file**
+```
+This product includes create-http-resources-slice
+Copyright (c) 2024 create-http-resources-slice
+Licensed under MIT License
+```
+
+### When Attribution is Required
+
+- ✅ Distributing the library (modified or unmodified)
+- ✅ Creating derivative works based on this library
+- ✅ Including this library in a larger software package
+- ✅ Using this library in commercial products
+
+### When Attribution is NOT Required
+
+- ❌ Using the library as intended (normal import/usage in your application)
+- ❌ Private/internal use without distribution
+
+For questions about attribution requirements, please contact the maintainers.

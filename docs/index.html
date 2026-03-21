@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create-http-resources-slice - Documentation</title>
+    <meta name="description" content="Zero-dependency, framework-agnostic HTTP resource management with optimistic updates">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border: #e5e7eb;
+            --code-bg: #1f2937;
+            --code-text: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--bg-secondary);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Code Section */
+        .code-section {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 5rem 0;
+        }
+
+        .code-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .code-example {
+            background: #111827;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #374151;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .code-text {
+            color: #e5e7eb;
+        }
+
+        .code-keyword {
+            color: #c084fc;
+        }
+
+        .code-string {
+            color: #86efac;
+        }
+
+        .code-function {
+            color: #60a5fa;
+        }
+
+        .code-comment {
+            color: #6b7280;
+        }
+
+        /* API Section */
+        .api-section {
+            padding: 5rem 0;
+        }
+
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .api-table th,
+        .api-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .api-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        .api-table code {
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        /* Installation */
+        .installation {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
+        }
+
+        .install-command {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            opacity: 0.8;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .code-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">create-http-resources-slice</a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li><a href="#api">API</a></li>
+                    <li><a href="https://github.com/yourusername/create-http-resources-slice">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badges">
+                <span class="badge">⚡ Zero Dependencies</span>
+                <span class="badge">🔌 Framework Agnostic</span>
+                <span class="badge">🤖 AI Agent Ready</span>
+                <span class="badge">📦 ~2kb Minified</span>
+            </div>
+            <h1>HTTP Resource Management Made Simple</h1>
+            <p>Generate type-safe CRUD operations with optimistic updates, loading states, and error handling. Works with any state management solution.</p>
+            <div class="cta-buttons">
+                <a href="#installation" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/yourusername/create-http-resources-slice" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why You'll Love It</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Zero Dependencies</h3>
+                    <p>No runtime dependencies, just pure TypeScript. Keep your bundle size minimal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Framework Agnostic</h3>
+                    <p>Works with Zustand, Valtio, or any state manager using (set, get) pattern.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Agent Ready</h3>
+                    <p>Predictable API perfect for AI code generation and autonomous agents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Optimistic Updates</h3>
+                    <p>Built-in support for optimistic UI with automatic rollback on failure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Type Safe</h3>
+                    <p>Full TypeScript support with inferred types for maximum developer experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>Request Cancellation</h3>
+                    <p>Cancel in-flight requests to prevent memory leaks and race conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto;">
+                Install the package using your favorite package manager:
+            </p>
+            <div style="text-align: center;">
+                <code class="install-command">npm install create-http-resources-slice</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage -->
+    <section id="usage" class="code-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Quick Start</h2>
+            <div class="code-container">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1rem;">Basic Usage with Zustand</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1.5rem;">
+                        Create a resource slice and start making CRUD operations in seconds.
+                    </p>
+                    <ul style="color: #9ca3af; line-height: 2;">
+                        <li>✅ Auto-generated CRUD functions</li>
+                        <li>✅ Loading states per operation</li>
+                        <li>✅ Error handling built-in</li>
+                        <li>✅ Type-safe by default</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+                    <div class="code-header">store.ts</div>
+<pre><code><span class="code-keyword">import</span> { create } <span class="code-keyword">from</span> <span class="code-string">'zustand'</span>;
+<span class="code-keyword">import</span> { <span class="code-function">createHttpResources</span> } <span class="code-keyword">from</span> <span class="code-string">'create-http-resources-slice'</span>;
+
+<span class="code-keyword">type</span> User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+<span class="code-keyword">const</span> useStore = <span class="code-function">create</span>((set, get) => ({
+  ...<span class="code-function">createHttpResources</span>(<span class="code-string">'user'</span>)(set, get),
+}));
+
+<span class="code-comment">// Usage in components</span>
+<span class="code-keyword">const</span> { 
+  user, 
+  fetchUser, 
+  postUser, 
+  userLoading 
+} = <span class="code-function">useStore</span>();
+
+<span class="code-keyword">await</span> <span class="code-function">fetchUser</span>();
+<span class="code-keyword">await</span> <span class="code-function">postUser</span>({ name: <span class="code-string">'John'</span>, email: <span class="code-string">'john@example.com'</span> });</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API -->
+    <section id="api" class="api-section">
+        <div class="container">
+            <h2 class="section-title">API Reference</h2>
+            
+            <h3 style="margin-bottom: 1rem;">createHttpResources(name, options?)</h3>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">
+                Creates a resource slice with CRUD operations.
+            </p>
+
+            <h4 style="margin-bottom: 1rem;">Options</h4>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>include</code></td>
+                        <td><code>"all" | HttpMethod[]</code></td>
+                        <td><code>"all"</code></td>
+                        <td>HTTP methods to include</td>
+                    </tr>
+                    <tr>
+                        <td><code>baseUrl</code></td>
+                        <td><code>string</code></td>
+                        <td><code>""</code></td>
+                        <td>Base URL prefix (e.g., "/api")</td>
+                    </tr>
+                    <tr>
+                        <td><code>isOptimistic</code></td>
+                        <td><code>boolean</code></td>
+                        <td><code>false</code></td>
+                        <td>Enable optimistic updates</td>
+                    </tr>
+                    <tr>
+                        <td><code>fetchOptions</code></td>
+                        <td><code>RequestInit</code></td>
+                        <td><code>{}</code></td>
+                        <td>Default fetch options</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 2rem 0 1rem;">Generated Functions</h4>
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Signature</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>fetch{Resource}</code></td>
+                        <td><code>(params?) => Promise&lt;TData[]&gt;</code></td>
+                        <td>Fetch all items</td>
+                    </tr>
+                    <tr>
+                        <td><code>post{Resource}</code></td>
+                        <td><code>(body, options?) => Promise&lt;TData&gt;</code></td>
+                        <td>Create new item</td>
+                    </tr>
+                    <tr>
+                        <td><code>put{Resource}</code></td>
+                        <td><code>(id, body, options?) => Promise&lt;TData&gt;</code></td>
+                        <td>Replace item</td>
+                    </tr>
+                    <tr>
+                        <td><code>patch{Resource}</code></td>
+                        <td><code>(id, body, options?) => Promise&lt;TData&gt;</code></td>
+                        <td>Partial update</td>
+                    </tr>
+                    <tr>
+                        <td><code>del{Resource}</code></td>
+                        <td><code>(id) => Promise&lt;void&gt;</code></td>
+                        <td>Delete item</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ for the JavaScript community</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">
+                <a href="https://github.com/yourusername/create-http-resources-slice">GitHub</a> •
+                <a href="https://www.npmjs.com/package/create-http-resources-slice">npm</a> •
+                <a href="#">Documentation</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
