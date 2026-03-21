@@ -1,0 +1,42 @@
+# Source files (not needed in published package)
+*.ts
+!dist/*.d.ts
+*.test.ts
+*.spec.ts
+
+# Development configs
+.eslintrc.cjs
+.prettierrc
+.prettierignore
+tsconfig.json
+vitest.config.ts
+
+# Git
+.git
+.gitignore
+
+# GitHub
+.github/
+
+# Documentation
+docs/
+CONTRIBUTING.md
+CHANGELOG.md
+NOTICE
+SECURITY.md
+
+# Testing
+coverage/
+.vitest/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Misc
+*.md
+!README.md
