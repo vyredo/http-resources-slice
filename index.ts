@@ -1,5 +1,5 @@
 /**
- * create-http-resources-slice
+ * http-resources-slice
  * 
  * Zero-dependency, framework-agnostic HTTP resource management
  * with optimistic updates and type-safe CRUD operations.

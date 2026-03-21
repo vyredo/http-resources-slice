@@ -122,8 +122,8 @@ try {
 ## Contact
 
 For security-related questions, please contact:
-- Email: security@example.com
-- GitHub: @yourusername
+- Email: [Contact via GitHub](https://github.com/vyredo/http-resources-slice)
+- GitHub: @vyredo
 
 ---
 

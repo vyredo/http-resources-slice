@@ -1,7 +1,7 @@
 {
-  "name": "create-http-resources-slice",
+  "name": "http-resources-slice",
   "version": "0.1.0",
-  "description": "A TypeScript library for creating HTTP resource slices with CRUD operations and optimistic updates",
+  "description": "Zero-dependency, framework-agnostic HTTP resource management with optimistic updates",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -44,12 +44,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/create-http-resources-slice.git"
+    "url": "https://github.com/vyredo/http-resources-slice.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/create-http-resources-slice/issues"
+    "url": "https://github.com/vyredo/http-resources-slice/issues"
   },
-  "homepage": "https://github.com/yourusername/create-http-resources-slice#readme",
+  "homepage": "https://github.com/vyredo/http-resources-slice#readme",
   "engines": {
     "node": ">=20.0.0"
   },

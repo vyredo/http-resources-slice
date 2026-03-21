@@ -19,7 +19,7 @@ If you modify or redistribute this software, please include:
 
 1. **Original Copyright**: "Copyright (c) 2024 create-http-resources-slice"
 2. **License**: Include the MIT License text
-3. **Source**: Link to the original repository: https://github.com/yourusername/create-http-resources-slice
+3. **Source**: Link to the original repository: https://github.com/vyredo/http-resources-slice
 4. **Changes**: Document any significant modifications you've made
 
 ### Example Attribution Statement
@@ -27,7 +27,7 @@ If you modify or redistribute this software, please include:
 ```
 This project includes create-http-resources-slice, 
 Copyright (c) 2024, licensed under MIT License.
-Original source: https://github.com/yourusername/create-http-resources-slice
+Original source: https://github.com/vyredo/http-resources-slice
 [Optional: Modified by Your Name on Date - Description of changes]
 ```
 
@@ -42,4 +42,4 @@ incorporate third-party libraries.
 
 ---
 
-For more information, please visit: https://github.com/yourusername/create-http-resources-slice
+For more information, please visit: https://github.com/vyredo/http-resources-slice

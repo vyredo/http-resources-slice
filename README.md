@@ -1,4 +1,9 @@
-# create-http-resources-slice
+# http-resources-slice
+
+[![npm version](https://img.shields.io/npm/v/http-resources-slice.svg)](https://www.npmjs.com/package/http-resources-slice)
+[![npm downloads](https://img.shields.io/npm/dm/http-resources-slice.svg)](https://www.npmjs.com/package/http-resources-slice)
+[![bundle size](https://img.shields.io/bundlephobia/min/http-resources-slice)](https://bundlephobia.com/package/http-resources-slice)
+[![license](https://img.shields.io/github/license/vyredo/http-resources-slice)](https://github.com/vyredo/http-resources-slice/blob/main/LICENSE)
 
 > **Zero-dependency, framework-agnostic HTTP resource management with optimistic updates**
 
@@ -20,11 +25,11 @@ A lightweight TypeScript library that generates type-safe CRUD operations with b
 ## 📦 Installation
 
 ```bash
-npm install create-http-resources-slice
+npm install http-resources-slice
 # or
-yarn add create-http-resources-slice
+yarn add http-resources-slice
 # or
-pnpm add create-http-resources-slice
+pnpm add http-resources-slice
 ```
 
 ## 🚀 Quick Start
@@ -33,7 +38,7 @@ pnpm add create-http-resources-slice
 
 ```typescript
 import { create } from 'zustand';
-import { createHttpResources } from 'create-http-resources-slice';
+import { createHttpResources } from 'http-resources-slice';
 
 type User = {
   id: number;
