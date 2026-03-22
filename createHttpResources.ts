@@ -1,4 +1,5 @@
-import { createCRUDSlice, GetFn, SetFn } from "./createCRUDSlice";
+import { createCRUDSlice } from "./createCRUDSlice";
+import type { GetFn, SetFn } from "./createCRUDSlice";
 import { createHttpFunctions } from "./createHttpFunctions";
 
 export type HttpMethod = "fetch" | "post" | "put" | "patch" | "del";

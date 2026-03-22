@@ -2,7 +2,7 @@
 // createResources
 // ---------------------------------------------------------------------------
 
-import { CreateResourcesOptions, HttpMethod } from "./createHttpResources";
+import type { CreateResourcesOptions, HttpMethod } from "./createHttpResources";
 
 type QueryParamValue = string | number | boolean | null | undefined;
 
@@ -39,17 +39,17 @@ const defaultFetch = async <T>(
     defaultHeaders?: Record<string, string>,
     signal?: AbortSignal
 ): Promise<T> => {
-    const mergedHeaders: Record<string, string> = {
+    const headers: Record<string, string> = {
         "Content-Type": "application/json",
-        ...(defaultHeaders),
+        ...defaultHeaders,
         ...(options.headers as Record<string, string>),
     };
 
     const response = await fetch(url, {
         ...options,
-        headers: mergedHeaders,
-        signal,
-    });
+        headers,
+        signal: signal ?? null,
+    } as RequestInit);
 
     if (!response.ok) {
         const errorText = await response.text().catch(() => response.statusText);
@@ -238,32 +238,32 @@ export function createHttpFunctions<
 
     if (methods.includes("fetch")) {
         const { fn, cancel } = createFetchFn<TItem>(baseUrl, resource, options?.fetchOptions?.headers);
-        result.fetchFn = fn;
-        result.cancelFetch = cancel;
+        (result as any).fetchFn = fn;
+        (result as any).cancelFetch = cancel;
     }
 
     if (methods.includes("post")) {
         const { fn, cancel } = createPostFn<TItem>(baseUrl, resource, options?.fetchOptions?.headers);
-        result.postFn = fn;
-        result.cancelPost = cancel;
+        (result as any).postFn = fn;
+        (result as any).cancelPost = cancel;
     }
 
     if (methods.includes("put")) {
         const { fn, cancel } = createPutFn<TItem>(baseUrl, resource, options?.fetchOptions?.headers);
-        result.putFn = fn;
-        result.cancelPut = cancel;
+        (result as any).putFn = fn;
+        (result as any).cancelPut = cancel;
     }
 
     if (methods.includes("patch")) {
         const { fn, cancel } = createPatchFn<TItem>(baseUrl, resource, options?.fetchOptions?.headers);
-        result.patchFn = fn;
-        result.cancelPatch = cancel;
+        (result as any).patchFn = fn;
+        (result as any).cancelPatch = cancel;
     }
 
     if (methods.includes("del")) {
         const { fn, cancel } = createDelFn(baseUrl, resource, options?.fetchOptions?.headers);
-        result.delFn = fn;
-        result.cancelDel = cancel;
+        (result as any).delFn = fn;
+        (result as any).cancelDel = cancel;
     }
 
     return result as {

@@ -1,8 +1,6 @@
 # Source files (not needed in published package)
 *.ts
 !dist/*.d.ts
-*.test.ts
-*.spec.ts
 
 # Development configs
 .eslintrc.cjs
@@ -28,6 +26,11 @@ SECURITY.md
 # Testing
 coverage/
 .vitest/
+*.test.ts
+*.test.js
+*.test.d.ts
+*.test.js.map
+*.test.d.ts.map
 
 # IDE
 .idea/
