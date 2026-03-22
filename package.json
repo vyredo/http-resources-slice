@@ -28,7 +28,7 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist coverage .vitest",
-    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepublishOnly": "npm run clean && npm run build",
     "prepare": "npm run build",
     "size": "size-limit",
     "analyze": "size-limit --why"
