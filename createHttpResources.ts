@@ -20,6 +20,11 @@ export type CreateResourcesOptions = {
      */
     baseUrl?: string;
     /**
+     * Enable optimistic updates for POST, PUT, PATCH
+     * @default false
+     */
+    isOptimistic?: boolean;
+    /**
      * Default fetch options applied to all requests
      */
     fetchOptions?: Omit<RequestInit, "method" | "body" | "headers"> & {
@@ -29,10 +34,9 @@ export type CreateResourcesOptions = {
 
 
 // ==================================================================================================================================================================================================================
-export const createHttpResources = <N extends string>(name: N, opt?: {
-    isOptimistic?: boolean
-}) => (set: SetFn<any>, get: GetFn<any>) => {
-    const { postFn, putFn, patchFn, ...rest } = createHttpFunctions(name)
+export const createHttpResources = <N extends string>(name: N, opt?: CreateResourcesOptions) => (set: SetFn<any>, get: GetFn<any>) => {
+    const options = opt ?? {};
+    const { postFn, putFn, patchFn, ...rest } = createHttpFunctions(name, options)
 
     const isOptimistic = !!opt?.isOptimistic;
 

@@ -6,8 +6,22 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { GetFn, SetFn } from "./createCRUDSlice";
 import { createHttpResources } from "./createHttpResources";
 
-// Polyfill global.fetch for tests
-const mockFetch = vi.fn();
+// ---------------------------------------------------------------------------
+// Mock fetch — single declaration (was duplicated, causing esbuild to fail)
+// ---------------------------------------------------------------------------
+type MockFetchHandler = (url: string, options: RequestInit) => Promise<Response>;
+
+let mockFetchHandler: MockFetchHandler = async () => {
+    throw new Error("Mock fetch not configured");
+};
+
+let fetchCalls: Array<{ url: string; options: RequestInit }> = [];
+
+const mockFetch = async (url: string, options: RequestInit = {}): Promise<Response> => {
+    fetchCalls.push({ url, options });
+    return mockFetchHandler(url, options);
+};
+
 (globalThis as any).fetch = mockFetch;
 
 // ---------------------------------------------------------------------------
@@ -73,22 +87,6 @@ export function createMockStore<T extends Record<string, unknown>>(
         },
     };
 }
-
-// Mock fetch implementation
-type MockFetchHandler = (url: string, options: RequestInit) => Promise<Response>;
-
-let mockFetchHandler: MockFetchHandler = async () => {
-    throw new Error("Mock fetch not configured");
-};
-
-let fetchCalls: Array<{ url: string; options: RequestInit }> = [];
-
-const mockFetch = async (url: string, options: RequestInit = {}): Promise<Response> => {
-    fetchCalls.push({ url, options });
-    return mockFetchHandler(url, options);
-};
-
-// Fetch is already set up above
 
 // ---------------------------------------------------------------------------
 // Test Helpers
